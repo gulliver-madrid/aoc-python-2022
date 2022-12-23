@@ -4,24 +4,20 @@ from src.utils import Lines, get_day_number, print_solution, read_data_from_day
 day_number = get_day_number(__file__)
 
 
-def calculate_max_elvs(lines: Lines, n: int) -> int:
-    elvs = [0]
+def build_calories_per_elf(lines: Lines) -> list[int]:
+    '''Returns a list with the Calories that each elf takes'''
+    calories_per_elf = [0]
     for line in lines:
         if line:
-            elvs[-1] += int(line)
+            calories_per_elf[-1] += int(line)
         else:
-            elvs.append(0)
-
-    total = 0
-    for i in range(n):
-        elv = max(elvs)
-        total += elv
-        elvs.remove(elv)
-    return total
+            calories_per_elf.append(0)
+    return calories_per_elf
 
 
 def solve(lines: Lines) -> int:
-    solution = calculate_max_elvs(lines, 1)
+    calories_per_elf = build_calories_per_elf(lines)
+    solution = max(calories_per_elf)
     return solution
 
 
