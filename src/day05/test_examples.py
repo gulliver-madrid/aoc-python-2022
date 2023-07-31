@@ -18,13 +18,15 @@ move 1 from 1 to 2'''
 
 
 def test_impl_a() -> None:
-    result = a.impl(a.get_stacks(first_input), second.split('\n'))
+    moves = a.parse_moves(second.split('\n'))
+    result = a.impl(a.get_stacks(first_input), moves)
     expected = 'CMZ'
     assert result == expected
 
 
 def test_impl_b() -> None:
-    result = b.impl(a.get_stacks(first_input), second.split('\n'))
+    moves = a.parse_moves(second.split('\n'))
+    result = b.impl(a.get_stacks(first_input), moves)
     expected = 'MCD'
     assert result == expected
 

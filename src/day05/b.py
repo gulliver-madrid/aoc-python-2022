@@ -1,14 +1,11 @@
 from typing import *
 from src.utils import *
-from .a import day_number, extract_parts, get_moves, get_stacks, get_upper_boxes
+from .a import Move, day_number, extract_parts, parse_moves, get_stacks, get_upper_boxes
 
 
 
-def impl(stacks: list[list[str]], second: Lines) -> str:
-    moves = get_moves(second)
-
+def impl(stacks: list[list[str]], moves: Sequence[Move]) -> str:
     for m in moves:
-        print(m)
         n, start, end = m
         box = stacks[start][-n:]
         stacks[start] = stacks[start][:-n]
@@ -20,7 +17,9 @@ def impl(stacks: list[list[str]], second: Lines) -> str:
 
 def solve(lines: Lines) -> str:
     first_input, second = extract_parts(lines)
-    solution = impl(get_stacks('\n'.join(first_input)), second)
+    stacks = get_stacks('\n'.join(first_input))
+    moves = parse_moves(second)
+    solution = impl(stacks, moves)
     return solution
 
 
